@@ -1,14 +1,14 @@
 /*
  * @Autor: zhiying Qin
  * @Date: 2022-10-31 20:18:13
- * @LastEditTime: 2022-11-08 20:43:47
+ * @LastEditTime: 2022-11-10 10:40:08
  */
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 
-import { Button, Layout, Drawer, Icon, Radio, Menu } from "ant-design-vue";
+import { Button, Layout, Drawer, Icon, Radio, Menu, Input, Form } from "ant-design-vue";
 
 import Authorized from "@/components/Authorized";
 
@@ -22,6 +22,8 @@ Vue.use(Drawer);
 Vue.use(Icon);
 Vue.use(Radio);
 Vue.use(Menu);
+Vue.use(Input);
+Vue.use(Form);
 
 Vue.component("Authorized", Authorized);
 Vue.use(Auth);

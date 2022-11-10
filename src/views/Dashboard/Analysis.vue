@@ -1,7 +1,7 @@
 <!--
  * @Autor: zhiying Qin
  * @Date: 2022-11-02 09:46:09
- * @LastEditTime: 2022-11-08 21:12:39
+ * @LastEditTime: 2022-11-10 10:52:07
 -->
 <template>
   <div class="Analysis"><Chart :options="options" v-if="key"></Chart></div>
@@ -28,7 +28,7 @@ export default {
   methods: {
     getChartData() {
       this.$request({
-        url: "/api/dashborad/chart1",
+        url: "/api/dashborad/chart",
         method: "get",
       }).then((res) => {
         console.log(res.data);
