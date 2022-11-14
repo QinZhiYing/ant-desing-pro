@@ -1,0 +1,88 @@
+<!--
+ * @Autor: zhiying Qin
+ * @Date: 2022-11-12 22:54:54
+ * @LastEditTime: 2022-11-13 01:01:05
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const menu = [
+        {
+          path: "/",
+          name: "/",
+          meta: {
+            title: "首页",
+          },
+          children: [
+            {
+              path: "/aaa",
+              name: "aaa",
+              meta: {
+                title: "aaa",
+              },
+            },
+            {
+              path: "/bbb",
+              name: "bbb",
+              meta: {
+                title: "bbb",
+              },
+              hiddenChild: true,
+              children: [
+                {
+                  path: "/bbb/1",
+                  name: "bbb1",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          path: "/login",
+          name: "login",
+          hidden: true,
+        },
+      ];
+
+      let openKeyMap = {};
+      let selectKeyMap = {};
+
+      function menuData(menuDataParams = [], parentKey = [], selectKey) {
+        const list = [];
+
+        for (let i = 0; i < menuDataParams.length; i++) {
+          let item = menuDataParams[i];
+          if (item.name && !item.hidden) {
+            openKeyMap[item.path] = parentKey;
+            selectKeyMap[item.path] = [selectKey || item.path];
+
+            let data = { ...item };
+            delete data.children;
+
+            if (item.children && !item.hiddenChild) {
+              data.children = menuData(item.children, [...parentKey, item.path]);
+            } else {
+              menuData(item.children, [...parentKey, item.path], item.path);
+            }
+
+            list.push(data);
+          }
+        }
+
+        return list;
+      }
+
+      let res = menuData(menu);
+      console.log(res);
+
+      console.log(openKeyMap, selectKeyMap);
+    </script>
+  </body>
+</html>

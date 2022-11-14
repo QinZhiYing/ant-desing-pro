@@ -1,7 +1,7 @@
 <!--
  * @Autor: zhiying Qin
  * @Date: 2022-11-02 20:09:17
- * @LastEditTime: 2022-11-02 20:53:45
+ * @LastEditTime: 2022-11-13 20:50:42
 -->
 <template>
   <div class="Drawer">
@@ -55,16 +55,4 @@ export default {
   },
 };
 </script>
-<style scoped lang="less">
-.themeClor {
-  position: absolute;
-  left: -58px;
-  top: 50%;
-  background: blue;
-  text-align: center;
-  color: #fff;
-  height: 60px;
-  line-height: 60px;
-  //   top: 50%;
-}
-</style>
+<style lang="less" src="./index.less"></style>

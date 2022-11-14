@@ -1,7 +1,7 @@
 /*
  * @Autor: zhiying Qin
  * @Date: 2022-10-31 20:18:13
- * @LastEditTime: 2022-11-06 02:40:00
+ * @LastEditTime: 2022-11-12 22:10:46
  */
 import Vue from "vue";
 import VueRouter from "vue-router";
@@ -72,7 +72,7 @@ const routes = [
             name: "step-form",
             component: () => import(/* webpackChunkName: "step-form" */ "../views/Forms/StepForm/index.vue"),
             hideChildrenInMenu: true,
-            meta: { title: "分布表单", auth: ["user"] },
+            meta: { title: "分布表单", auth: ["user", "admin"] },
             children: [
               {
                 path: "/form/step-form",

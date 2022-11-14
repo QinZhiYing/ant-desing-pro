@@ -1,10 +1,14 @@
 <!--
  * @Autor: zhiying Qin
  * @Date: 2022-11-02 09:46:09
- * @LastEditTime: 2022-11-10 10:52:07
+ * @LastEditTime: 2022-11-14 20:52:47
 -->
 <template>
-  <div class="Analysis"><Chart :options="options" v-if="key"></Chart></div>
+  <div class="Analysis">
+    <!-- {{ $I18N._t("hello") }} -->
+    <a-date-picker />
+    <Chart :options="options" v-if="key"></Chart>
+  </div>
 </template>
 
 <script>
@@ -20,6 +24,8 @@ export default {
   },
   created() {
     this.getChartData();
+
+    console.log(this.$I18N.t("hello"));
   },
   components: {
     Chart,

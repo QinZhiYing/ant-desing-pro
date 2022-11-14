@@ -1,10 +1,10 @@
 <!--
  * @Autor: zhiying Qin
  * @Date: 2022-11-02 10:19:54
- * @LastEditTime: 2022-11-10 19:09:16
+ * @LastEditTime: 2022-11-11 19:05:30
 -->
 <template>
-  <a-form :layout="formLayout">
+  <a-form :layout="formLayout" :form="form">
     <a-form-item label="Form Layout" :label-col="formItemLayout.labelCol" :wrapper-col="formItemLayout.wrapperCol">
       <a-radio-group default-value="horizontal" @change="handleFormLayoutChange">
         <a-radio-button value="horizontal"> Horizontal </a-radio-button>
@@ -12,17 +12,14 @@
         <a-radio-button value="inline"> Inline </a-radio-button>
       </a-radio-group>
     </a-form-item>
-    <a-form-item
-      label="Field A"
-      :label-col="formItemLayout.labelCol"
-      :wrapper-col="formItemLayout.wrapperCol"
-      :validateStatus="validateStatus"
-      :help="helpText"
-    >
-      <a-input placeholder="input placeholder" v-model="fieldA" />
+    <a-form-item label="Field A" :label-col="formItemLayout.labelCol" :wrapper-col="formItemLayout.wrapperCol">
+      <a-input
+        placeholder="input placeholder"
+        v-decorator="['fieldA', { rules: [{ message: '必须大于5个字符', min: 5, required: true }] }]"
+      />
     </a-form-item>
     <a-form-item label="Field B" :label-col="formItemLayout.labelCol" :wrapper-col="formItemLayout.wrapperCol">
-      <a-input placeholder="input placeholder" />
+      <a-input placeholder="input placeholder" v-decorator="['fieldB']" />
     </a-form-item>
     <a-form-item :wrapper-col="buttonItemLayout.wrapperCol">
       <a-button type="primary" @click="submit"> Submit </a-button>
@@ -33,23 +30,19 @@
 <script>
 export default {
   data() {
+    this.form = this.$form.createForm(this);
     return {
       formLayout: "horizontal",
-      validateStatus: "",
-      helpText: "",
       fieldA: "",
+      fieldB: "",
     };
   },
-  watch: {
-    fieldA: function (val) {
-      if (val.length < 5) {
-        this.validateStatus = "error";
-        this.helpText = "请输入5个字符";
-      } else {
-        this.validateStatus = "";
-        this.helpText = "";
-      }
-    },
+  mounted() {
+    setTimeout(() => {
+      this.form.setFieldsValue({
+        fieldA: "hello world",
+      });
+    }, 3000);
   },
   computed: {
     formItemLayout() {
@@ -75,12 +68,13 @@ export default {
       this.formLayout = e.target.value;
     },
     submit() {
-      if (this.fieldA.length < 5) {
-        this.validateStatus = "error";
-        this.helpText = "请输入5个字符";
-      } else {
-        console.log({ fieldA: this.fieldA });
-      }
+      this.form.validateFields((err, values) => {
+        if (!err) {
+          console.log(values);
+          Object.assign(this, values);
+          console.log(this.fieldA, this.fieldB);
+        }
+      });
     },
   },
 };
